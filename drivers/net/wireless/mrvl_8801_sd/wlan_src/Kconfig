@@ -1,0 +1,13 @@
+config MRVL8801
+	tristate "Marvell 8801 sdio wireless cards support"
+	depends on MMC
+	---help---
+	  This module adds support for wireless adapters based on
+	  Marvell 8801 chipset.
+
+config FW_PATH
+	depends on MRVL8801
+	string "Firmware path"
+	default "/lib/firmware/mrvl/sd8801_uapsta.bin"
+	---help---
+	  Can not modify firmware path.

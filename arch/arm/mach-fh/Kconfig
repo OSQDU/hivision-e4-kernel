@@ -1,0 +1,110 @@
+if ARCH_FULLHAN
+
+config CPU_FH81
+	select CPU_V6
+	bool
+	
+config CPU_WUDANG
+	select CPU_V6
+	bool
+	
+config CPU_LINBAO
+	select CPU_V6
+	bool
+	
+menu "FullHan Implementations"
+
+comment "FullHan Core Type"
+
+choice
+	prompt "Select Fullhan Chip:"
+	default ARCH_WUDANG
+
+config ARCH_FH81
+	bool "FullHan FH81 based system"
+	select CPU_FH81
+
+config ARCH_LINBAO
+	bool "FullHan Linbao based system"
+	select CPU_LINBAO
+
+
+config ARCH_WUDANG
+	bool "FullHan Wudang based system"
+	select CPU_WUDANG
+
+endchoice
+
+comment "FullHan Board Type"
+
+config MACH_FH81
+	bool "FullHan FH81 board"
+	default ARCH_FH81
+	depends on ARCH_FH81
+	select MISC_DEVICES
+	select I2C
+	help
+	  Configure this option to specify the whether the board used
+	  for development is a FH81 EVM
+
+config MACH_LINBAO_FPGA
+	bool "FullHan LINBAO fpga board"
+	default ARCH_LINBAO
+	depends on ARCH_LINBAO
+	select MISC_DEVICES
+	select I2C
+	help
+	  Configure this option to specify the whether the board used
+	  for development is a Linbao fpga
+	  
+config MACH_LINBAO
+	bool "FullHan LINBAO board"
+	default ARCH_LINBAO
+	depends on ARCH_LINBAO
+	select MISC_DEVICES
+	select I2C
+	help
+	  Configure this option to specify the whether the board used
+	  for development is Linbao
+
+config MACH_WUDANG
+	bool "FullHan Wudang board"
+	default ARCH_WUDANG
+	depends on ARCH_WUDANG
+	select MISC_DEVICES
+	select I2C
+	help
+	  Configure this option to specify the whether the board used
+	  for development is a Wudang EVM
+		  
+config MACH_HIK
+	bool "HIK FH81 board"
+	default n
+	depends on ARCH_FH81
+	select MISC_DEVICES
+	select I2C
+	help
+	  Configure this option to specify the whether the board used
+	  for development is a HIK EVM
+
+config MACH_LINBAO_TESTBOARD
+	bool "Linbao Test board"
+	default n
+	depends on ARCH_LINBAO
+	help
+	  Configure this option to specify the whether the board used
+	  for development is a Linbao Test Board
+	  
+config MACH_LINBAO_QFN
+	bool "Linbao QFN"
+	default n
+	depends on ARCH_LINBAO
+	help
+	  LINBAO QFN
+
+config JLINK_DEBUG
+	bool "Use jlink to debug kernel."
+
+endmenu
+
+endif
